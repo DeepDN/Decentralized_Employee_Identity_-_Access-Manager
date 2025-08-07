@@ -1,0 +1,42 @@
+{
+  "name": "decentralized-employee-identity",
+  "version": "1.0.0",
+  "description": "Decentralized Employee Identity & Access Manager using SSI standards",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run backend:dev\" \"npm run frontend:dev\" \"npm run wallet:dev\"",
+    "backend:dev": "cd backend && npm run dev",
+    "frontend:dev": "cd frontend && npm run dev",
+    "wallet:dev": "cd wallet && npm run dev",
+    "build": "npm run backend:build && npm run frontend:build && npm run wallet:build",
+    "backend:build": "cd backend && npm run build",
+    "frontend:build": "cd frontend && npm run build",
+    "wallet:build": "cd wallet && npm run build",
+    "test": "npm run backend:test && npm run frontend:test",
+    "backend:test": "cd backend && npm test",
+    "frontend:test": "cd frontend && npm test",
+    "deploy:staging": "npm run build && aws cloudformation deploy --template-file infrastructure/staging.yaml --stack-name employee-identity-staging",
+    "deploy:prod": "npm run build && aws cloudformation deploy --template-file infrastructure/production.yaml --stack-name employee-identity-prod",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "format": "prettier --write ."
+  },
+  "keywords": [
+    "decentralized-identity",
+    "verifiable-credentials",
+    "blockchain",
+    "ssi",
+    "employee-management"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5"
+  },
+  "workspaces": [
+    "backend",
+    "frontend",
+    "wallet"
+  ]
+}
